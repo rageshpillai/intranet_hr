@@ -1,0 +1,57 @@
+:css
+  .nav-tabs>.active>a, .nav-tabs>.active>a:hover, .nav-tabs>.active>a:focus{
+    background: -webkit-gradient( linear, left top, left bottom, from(#fff3db), to(rgba(0, 0, 0, 0.39)));
+  }
+  .leave_link{float: right;}
+.alert-message
+.leave_link
+  =link_to "Apply Leave", new_user_leave_application_path(current_user)
+%ul.leave_applicationTab.nav.nav-tabs
+  %li.active
+    %a#pending_link{data:{toggle: 'tab', leave_count: @pending_leaves.count}, href: '#pending_leave'}
+      Pending (#{@pending_leaves.count})
+  %li
+    %a#leave_history_link{data:{toggle: "tab"}, href: '#processed_leave'}
+      Leave History
+   
+.leave_application_tab_content.tab-content
+  #processed_leave.tab-pane.fade
+    = render 'leave_applications/leave_view', leave_data: @processed_leaves
+  #pending_leave.tab-pane.fade.in.active
+    = render 'leave_applications/leave_view', leave_data: @pending_leaves
+:javascript
+  
+  var reject_reason = ''
+
+  function process_btn_click(e){
+    e.stopPropagation();
+    app_id = $(this).parent('td').attr('id')
+    reason_div = $('.reason_'+app_id)
+    $('.reason_'+app_id).editable('toggle')
+    reason_div.attr('action', $(this).data('action'))
+  }
+
+  function make_editable(value){
+    reject_reason = value
+    update_leave($(this))
+  }
+
+  $('.reason').editable({
+    validate: make_editable
+  });
+  
+  $('.process_btn').click(process_btn_click);
+    
+  function update_leave(div){
+    action = div.attr('action')
+    leave_application_id = div.attr('id')
+    
+    $.ajax({
+      url: '/process_leave_application',
+      type: 'GET',
+      data: {id: leave_application_id, leave_action: action, reject_reason: reject_reason},
+      error: function(e){
+        $('.alert-message').alert({txt: 'Internal Server Error! Please contact web sysadmin', type: 'error'});  
+      }
+    });
+  }

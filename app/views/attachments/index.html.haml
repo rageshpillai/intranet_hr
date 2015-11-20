@@ -1,0 +1,15 @@
+%div.tabbable
+  %ul.nav.nav-tabs
+    %li.active.document-tab
+      %a{data: {toggle: 'tab'}, href: "#document"}
+        Documents
+    %li.policy-tab
+      %a{data: {toggle: "tab"}, href: "#policy"}
+        Policies
+
+  .tab-content
+    .tab-pane.active#document
+      = render partial: 'document'
+
+    .tab-pane#policy
+      = render partial: 'policy'

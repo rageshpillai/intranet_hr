@@ -1,0 +1,38 @@
+= f.hidden_field :user_id
+= f.input :start_at, label: 'Start Date', input_html: {class: 'datepicker', data: {'behaviour' => 'datepicker', 'validation-required-message' => 'You must select start date'}, required: true, value: f.object.start_at.try(:strftime, '%d-%m-%Y')}
+= f.input :end_at, label: 'End Date', input_html: {class: 'datepicker', data: {'behaviour' => 'datepicker', 'validation-required-message' => 'You must select end date'}, required: true, value: f.object.end_at.try(:strftime, '%d-%m-%Y')}
+= f.input :number_of_days, as: :decimal, label: 'Days', input_html: {step: 1}, input_html: { required: true, :'data-validation-required-message' => 'Enter the number of days', min: "1", :'data-validation-min-message' => "Number of day can't be zero or negative"}
+= f.input :contact_number, as: :decimal, label: 'Emergency Contact No.', input_html: {required: true, :'data-validation-required-message' => 'You need to enter your emergency number', type: 'text'}
+= f.input :reason, as: :text, label: 'Reason', input_html: {required: true, :'data-validation-required-message' => 'You have to specify valid reason for leave'}
+%center
+  = f.submit (params[:action] == "new" ? 'Apply' : 'Save Changes'), class: 'btn'
+:javascript
+  set_number_of_days()
+  DPGlobal = $.fn.datepicker.DPGlobal;
+  date_format = 'dd-mm-yyyy';
+
+
+  $("input,select,textarea").not("[type=submit]").jqBootstrapValidation();
+
+  $(document).ready(function(){
+    $('[data-behaviour="datepicker"]').datepicker({
+      format: "dd-mm-yyyy",
+      autoclose: true
+    });
+
+    $('form').submit(function(){
+      start_date_div = $('#leave_application_start_at')
+      end_date_div = $('#leave_application_end_at')
+      start_at = DPGlobal.parseDate(start_date_div.val(), date_format)
+      end_at = DPGlobal.parseDate(end_date_div.val(), date_format)
+      if(start_date_div.val() && start_at > end_at){
+        $("<div class='help-block end_date_error'><ul role='alert'><li>End date can not be less than start date</li></ul></div>").insertAfter(end_date_div)
+        end_date_div.parents('.control-group').addClass('error')
+        return false
+      }else if($('.end_date_error').length){
+        end_date_div.parents('.control-group').removeClass('error')
+        $('.end_date_error').remove()
+      }
+    });
+
+  });

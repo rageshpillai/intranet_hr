@@ -1,0 +1,100 @@
+// Place all the styles related to the home controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+body {
+    padding-bottom: 40px;
+    background-color: #f5f5f5;
+}
+
+
+/* begin styles for RSS Feed */
+
+.rss-box {
+  position: absolute;
+  left: 1%;
+  min-width: 30%;
+  max-width: 30%;
+  max-height: 68%;
+  min-height: 68%;
+  overflow-y: auto;
+  overflow-x: auto;
+  background-color: #FFFFFF;
+  box-shadow: 2px 2px 23px 0px;
+  border-radius: 3%;
+
+}
+.rss-item-auth{
+  color: #9B2813;
+}
+.rss-items {
+  margin-top:0px;
+  padding:0.5em;
+  color: #FFFFFF;
+}
+p.rss-title {padding:0.5em;}
+.rss-title {
+  text-decoration: none;
+  font-family: small tahoma, "Bitstream Vera Sans", "Trebuchet MS", "Lucida Grande", lucida, helvetica, sans-serif;
+  font-size: 15px;
+  background-color:#9B2813;
+  color:white;
+  font-weight:bold;
+  margin: 0px;
+  padding:0em;
+  text-align: left;
+}
+
+.rss-item  {
+  list-style:none;
+  padding-bottom:1em;
+}
+
+.rss-item a {
+  text-decoration : none;
+  color: #3300FF;
+}
+
+.rss-item a:visited {
+  color: #330066;
+}
+
+.rss-date {
+  font-size: 85%;
+  color: black;
+}
+
+
+.bonusly-updates{
+  position: absolute;  
+  max-width: 30%; 
+  min-width: 30%; 
+  max-height: 68%;
+  min-height: 68%;
+  overflow-y: auto;
+  overflow-x: auto;
+  left: 67.5%;
+  padding: 0px 10px;
+  background-color: white; 
+  box-shadow: 2px 2px 23px 0px;
+  border-radius: 3%;
+}
+
+.common-bonusly-updates{
+  max-height: 34%;
+  min-height: 34%;
+  left: 60%;
+}
+
+.common-bonusly-updates-bottom{
+  bottom: 5%;
+}
+
+.blog{
+  left: 1%
+}
+
+.media-object
+{
+    max-width: 80px;
+    max-height: 80px;
+}

@@ -1,0 +1,1 @@
+PER_MONTH_LEAVE = 2

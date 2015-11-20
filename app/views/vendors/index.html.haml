@@ -1,0 +1,51 @@
+.form-heading.row
+  %h2 
+    .span4
+      Vendors
+    .offset6{style: "float: right;"}
+      = render partial: "/layouts/vendor_menu"
+.form-horizontal
+  %table#vendor_stream_table.table.table-hover
+    %thead
+      %tr
+        %th Company
+        %th Category
+        %th Role
+        %th Name
+        %th Phone No
+        %th Email
+    %tbody
+      %script#template{type: "text/html"}
+        %tr
+          {{#record}}
+          %td.company_name{style: "width: auto;"}
+            {{company}}
+            .actions
+              - if can? :manage, Vendor
+                %a{href: "/vendors/{{record._id.$oid}}/edit", class: "icon-edit", data: {'no-turbolink' =>  true}}
+                %a{href: "/vendors/{{record._id.$oid}}", "data-method" => :delete, "data-confirm" => "Are you sure?", class: "icon-trash"}
+          %td {{category}}
+          {{#first_contact}}
+          %td {{role}}
+          %td {{name}}
+          %td {{phone_no}}
+          %td {{email}}
+          {{/first_contact}}
+        {{#remaining}}
+        %tr
+          %td
+          %td
+          %td {{role}}
+          %td {{name}}
+          %td {{phone_no}}
+          %td {{email}}
+        {{/remaining}}
+        {{/record}}
+
+:css
+  .contact {border-top: 1px white;}
+  .st_per_page {float: right;}
+
+:coffeescript
+  @data = #{@vendors.to_json}
+
