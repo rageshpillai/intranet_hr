@@ -8,7 +8,7 @@
 /config/service_account_key.p12
 
 #ignore seed file
-/db/seeds.rb
+
 /config/mongoid.yml
 #ignore smtp credentials
 
