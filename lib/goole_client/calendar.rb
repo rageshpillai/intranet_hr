@@ -3,6 +3,7 @@ require 'date'
 require 'openssl'
 class GoogleClient
   def self.connect
+    p ":fdsgdrf"
     account_email = '663367146304-kcdkinutmtcln66r67qm2db7qj5h10na@developer.gserviceaccount.com' 
     key_file = "#{Dir.pwd}/privatekey.p12"
     key_secret = 'notasecret' 
